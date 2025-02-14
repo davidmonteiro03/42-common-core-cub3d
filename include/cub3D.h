@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dcaetano <dcaetano@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: dcaetano <dcaetano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:28:50 by dcaetano          #+#    #+#             */
-/*   Updated: 2024/09/09 09:20:39 by dcaetano         ###   ########.fr       */
+/*   Updated: 2025/02/14 08:41:26 by dcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -457,7 +457,6 @@ void			cub_check_input(t_cub *cub, int argc, char **argv);
 /* ************************************************************************** */
 
 // map
-t_player		cub_get_player_pos(char **map);
 int				cub_get_start(char **content, int i);
 void			cub_set_map(t_cub *cub);
 
