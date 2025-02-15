@@ -6,7 +6,7 @@
 /*   By: dcaetano <dcaetano@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 11:52:33 by dcaetano          #+#    #+#             */
-/*   Updated: 2024/01/08 21:42:37 by dcaetano         ###   ########.fr       */
+/*   Updated: 2025/02/15 21:20:54 by dcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ t_coord	cub_get_coord(char **strs, int i)
 		j = -1;
 		while (strs[i][++j])
 		{
-			if (strs[i][j] != '-' && \
-				strs[i][j] != '1' && \
-				strs[i][j] != 'V')
+			if (strs[i][j] != '-' && strs[i][j] != '1' && strs[i][j] != 'V')
 			{
 				coord.x = i;
 				coord.y = j;
@@ -46,8 +44,8 @@ void	cub_flood_fill(t_cub *cub, char **map, int x, int y)
 	old = map[x][y];
 	map[x][y] = 'V';
 	if (old == '-')
-		return (multiple_free("%b", map), \
-			cub_error_file(cub, ERROR_WALLS, false));
+		return (multiple_free("%b", map), cub_error_file(cub, ERROR_WALLS,
+				false));
 	if (x > 0)
 		cub_flood_fill(cub, map, x - 1, y);
 	if (x < cub_strs_size(map) - 1)
@@ -69,9 +67,8 @@ bool	cub_fix_check(char **copy, int *i, int *j)
 		cub_check_2(&adj, copy, *i, *j);
 	else
 		cub_check_3(&adj, copy, *i, *j);
-	if ((adj.up == '-' || adj.down == '-' || \
-		adj.left == '-' || adj.right == '-') && \
-		copy[*i][*j] == ' ')
+	if ((adj.up == '-' || adj.down == '-' || adj.left == '-'
+			|| adj.right == '-') && copy[*i][*j] == ' ')
 	{
 		copy[*i][*j] = '-';
 		*i = -1;
@@ -106,8 +103,8 @@ void	cub_check_border(t_cub *cub, int start, int end)
 	copy = cub_copy_2(map, -1, cub_get_max_len(map, ' ', -1));
 	multiple_free("%b", map);
 	if ((int)ft_strlen(copy[0]) < 3 || cub_strs_size(copy) < 3)
-		return (multiple_free("%b", copy), \
-			cub_error_file(cub, ERROR_FILE, false));
+		return (multiple_free("%b", copy), cub_error_file(cub, ERROR_FILE,
+				false));
 	cub_little_update(copy);
 	cub_prepare_copy(copy, -1);
 	cub_fix_copy(copy);

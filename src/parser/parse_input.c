@@ -6,7 +6,7 @@
 /*   By: dcaetano <dcaetano@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 18:07:57 by dcaetano          #+#    #+#             */
-/*   Updated: 2024/09/11 13:56:35 by dcaetano         ###   ########.fr       */
+/*   Updated: 2025/02/15 21:21:41 by dcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,11 @@ char	*cub_check_extension(t_cub *cub, char *arg, char *extension)
 	extension_len = ft_strlen(extension);
 	new_arg = ft_strtrim(arg, " ");
 	if (ft_strlen(new_arg) < extension_len + 1)
-		return (free(cub), free(new_arg), \
-			cub_error(ERROR_LENGTH), NULL);
-	input_extension = ft_substr(new_arg, ft_strlen(new_arg) - \
-		extension_len, extension_len);
+		return (free(cub), free(new_arg), cub_error(ERROR_LENGTH), NULL);
+	input_extension = ft_substr(new_arg, ft_strlen(new_arg) - extension_len,
+			extension_len);
 	if (cub_strcmp(input_extension, extension))
-		return (free(cub), free(new_arg), free(input_extension), \
+		return (free(cub), free(new_arg), free(input_extension),
 			cub_error(ERROR_EXTENSION), NULL);
 	return (free(input_extension), new_arg);
 }

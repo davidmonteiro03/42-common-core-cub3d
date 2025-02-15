@@ -6,7 +6,7 @@
 /*   By: dcaetano <dcaetano@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:59:14 by dcaetano          #+#    #+#             */
-/*   Updated: 2023/12/13 12:28:56 by dcaetano         ###   ########.fr       */
+/*   Updated: 2025/02/15 21:19:59 by dcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	cub_check_config_content(t_cub *cub, int start, int end)
 {
 	while (start <= end)
 	{
-		if (!*cub->config.content[start] || \
-			cub_dif_char_in(cub->config.content[start], " \t"))
+		if (!*cub->config.content[start]
+			|| cub_dif_char_in(cub->config.content[start], " \t"))
 		{
 			start++;
 			continue ;

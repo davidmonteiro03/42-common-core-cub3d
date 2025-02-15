@@ -6,7 +6,7 @@
 /*   By: dcaetano <dcaetano@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 08:26:12 by dcaetano          #+#    #+#             */
-/*   Updated: 2024/01/08 21:38:01 by dcaetano         ###   ########.fr       */
+/*   Updated: 2025/02/15 21:20:27 by dcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 bool	cub_check_char_util(t_adj adj)
 {
-	return (!((adj.up == '-' || adj.left == '-' || \
-		adj.right == '-' || adj.down == '-') && adj.center != '1'));
+	return (!((adj.up == '-' || adj.left == '-' || adj.right == '-'
+				|| adj.down == '-') && adj.center != '1'));
 }
 
 bool	cub_check_char_border(char **map, int i, int j)

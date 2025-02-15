@@ -6,7 +6,7 @@
 /*   By: dcaetano <dcaetano@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 16:26:58 by dcaetano          #+#    #+#             */
-/*   Updated: 2024/01/08 21:13:19 by dcaetano         ###   ########.fr       */
+/*   Updated: 2025/02/15 21:21:51 by dcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void	cub_set_config(t_cub *cub)
 {
 	char	**args;
 
-	args = cub_get_lines(cub->config.content, cub->config_info.pos_start, \
-		cub->config_info.pos_end);
+	args = cub_get_lines(cub->config.content, cub->config_info.pos_start,
+			cub->config_info.pos_end);
 	cub_set_textures(cub, args, -1);
 	cub_set_colors(cub, args, -1);
 	multiple_free("%b", args);

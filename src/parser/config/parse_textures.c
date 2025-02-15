@@ -6,7 +6,7 @@
 /*   By: dcaetano <dcaetano@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 12:49:03 by dcaetano          #+#    #+#             */
-/*   Updated: 2023/12/15 09:37:53 by dcaetano         ###   ########.fr       */
+/*   Updated: 2025/02/15 21:19:54 by dcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ bool	cub_check_texture(char *texture, char *extension)
 	extension_len = ft_strlen(extension);
 	if (ft_strlen(texture) < extension_len + 1)
 		return (false);
-	input_extension = ft_substr(texture, ft_strlen(texture) - \
-		extension_len, extension_len);
+	input_extension = ft_substr(texture, ft_strlen(texture) - extension_len,
+			extension_len);
 	if (cub_strcmp(input_extension, extension))
 		return (free(input_extension), false);
 	free(input_extension);
 	tmp.mlx = mlx_init();
-	tmp.img.img = mlx_xpm_file_to_image(tmp.mlx, texture, \
-		&tmp.img.width, &tmp.img.height);
+	tmp.img.img = mlx_xpm_file_to_image(tmp.mlx, texture, &tmp.img.width,
+			&tmp.img.height);
 	if (!tmp.img.img)
 		return (mlx_destroy_display(tmp.mlx), free(tmp.mlx), false);
 	mlx_destroy_image(tmp.mlx, tmp.img.img);
@@ -47,8 +47,8 @@ void	cub_check_texture_args(t_cub *cub, char *type, char *line)
 	args = cub_get_args(line);
 	size = cub_strs_size(args);
 	if (size != 2)
-		return (multiple_free("%b", args), \
-			cub_error_file(cub, ERROR_TEXTURES, false));
+		return (multiple_free("%b", args), cub_error_file(cub, ERROR_TEXTURES,
+				false));
 	texture = ft_strdup(args[1]);
 	multiple_free("%b", args);
 	if (!cub_check_texture(texture, ".xpm"))
@@ -62,8 +62,8 @@ void	cub_check_config_textures(t_cub *cub, int start, int end)
 
 	while (start <= end)
 	{
-		if (!*cub->config.content[start] || \
-			cub_dif_char_in(cub->config.content[start], " \t"))
+		if (!*cub->config.content[start]
+			|| cub_dif_char_in(cub->config.content[start], " \t"))
 		{
 			start++;
 			continue ;

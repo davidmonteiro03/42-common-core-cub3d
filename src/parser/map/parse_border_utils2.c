@@ -6,7 +6,7 @@
 /*   By: dcaetano <dcaetano@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 21:37:59 by dcaetano          #+#    #+#             */
-/*   Updated: 2023/12/15 12:27:23 by dcaetano         ###   ########.fr       */
+/*   Updated: 2025/02/15 21:20:20 by dcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ t_parse	cub_init_parse(void)
 
 bool	cub_check_space(t_parse parse, char **strs, int i, int j)
 {
-	return (parse.up != parse.spc_up && parse.left != parse.spc_left && \
-		parse.right != parse.spc_right && parse.down != parse.spc_down && \
-		strs[i][j] == '-');
+	return (parse.up != parse.spc_up && parse.left != parse.spc_left
+		&& parse.right != parse.spc_right && parse.down != parse.spc_down
+		&& strs[i][j] == '-');
 }
 
 void	cub_check_char(char **strs, int i, int j)

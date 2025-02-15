@@ -6,7 +6,7 @@
 /*   By: dcaetano <dcaetano@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 08:12:35 by dcaetano          #+#    #+#             */
-/*   Updated: 2023/12/15 08:16:21 by dcaetano         ###   ########.fr       */
+/*   Updated: 2025/02/15 21:21:19 by dcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	cub_check_player(t_cub *cub, int start, int end)
 	{
 		j = -1;
 		while (map[i][++j])
-			if (map[i][j] == 'N' || map[i][j] == 'S' || \
-				map[i][j] == 'E' || map[i][j] == 'W')
+			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
+				|| map[i][j] == 'W')
 				count++;
 	}
 	multiple_free("%b", map);

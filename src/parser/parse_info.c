@@ -6,7 +6,7 @@
 /*   By: dcaetano <dcaetano@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 21:46:31 by dcaetano          #+#    #+#             */
-/*   Updated: 2023/12/13 16:22:40 by dcaetano         ###   ########.fr       */
+/*   Updated: 2025/02/15 21:21:36 by dcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	cub_check_config(char **file_content, int i, t_info *config_info)
 		{
 			if (config_info->pos_start == -1)
 				config_info->pos_start = i;
-			while (file_content[i] && \
-				cub_check_mapline(file_content[i], MAP_CHARSET, -1) != 2 && \
-				cub_check_mapline(file_content[i], MAP_CHARSET, -1) != 1)
+			while (file_content[i] && cub_check_mapline(file_content[i],
+					MAP_CHARSET, -1) != 2 && cub_check_mapline(file_content[i],
+					MAP_CHARSET, -1) != 1)
 				i++;
 			config_info->pos_end = i - 1;
 			continue ;
@@ -48,8 +48,8 @@ void	cub_check_config(char **file_content, int i, t_info *config_info)
 void	cub_check_mixes(t_cub *cub, int start, int end, bool flag)
 {
 	while (start <= end)
-		if (cub_check_mapline(cub->config.content[start++], MAP_CHARSET, -1) \
-			== flag)
+		if (cub_check_mapline(cub->config.content[start++], MAP_CHARSET,
+				-1) == flag)
 			cub_error_file(cub, ERROR_FILE, false);
 }
 
@@ -61,9 +61,9 @@ void	cub_check_maps(char **file_content, int i, t_info *map_info)
 		{
 			if (map_info->pos_start == -1)
 				map_info->pos_start = i;
-			while (file_content[i] && \
-				cub_check_mapline(file_content[i], MAP_CHARSET, -1) != 2 && \
-				cub_check_mapline(file_content[i], MAP_CHARSET, -1) != 0)
+			while (file_content[i] && cub_check_mapline(file_content[i],
+					MAP_CHARSET, -1) != 2 && cub_check_mapline(file_content[i],
+					MAP_CHARSET, -1) != 0)
 				i++;
 			map_info->pos_end = i - 1;
 			continue ;
@@ -82,10 +82,9 @@ void	cub_check_data(t_cub *cub)
 		cub_error_file(cub, ERROR_FILE, false);
 	if (cub->config_info.pos_start > cub->map_info.pos_start)
 		cub_error_file(cub, ERROR_FILE, false);
-	cub_check_mixes(cub, cub->config_info.pos_start, cub->config_info.pos_end, \
+	cub_check_mixes(cub, cub->config_info.pos_start, cub->config_info.pos_end,
 		true);
-	cub_check_mixes(cub, cub->map_info.pos_start, cub->map_info.pos_end, \
-		false);
+	cub_check_mixes(cub, cub->map_info.pos_start, cub->map_info.pos_end, false);
 	cub_check_config_info(cub, cub->config_info);
 	cub_check_map_info(cub, cub->map_info);
 }
