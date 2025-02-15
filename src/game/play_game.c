@@ -6,7 +6,7 @@
 /*   By: dcaetano <dcaetano@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 18:31:24 by dcaetano          #+#    #+#             */
-/*   Updated: 2024/09/09 09:11:11 by dcaetano         ###   ########.fr       */
+/*   Updated: 2025/02/15 20:27:09 by dcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,20 @@
 
 int	cub_render(t_cub *cub)
 {
-	auto int time = clock(), old_time = 0, x, y;
+	int		time;
+	int		old_time;
+	int		x;
+	int		y;
+	double	frame_time;
+
+	time = clock();
+	old_time = 0;
 	mlx_mouse_get_pos(cub->mlx.mlx, cub->mlx.win, &x, &y);
 	cub_check_keys(cub, x, y);
 	cub_raycast(cub);
 	old_time = time;
 	time = clock();
-	auto double frame_time = (time - old_time) / FRAME_STEP;
+	frame_time = (time - old_time) / FRAME_STEP;
 	cub->player.move_speed = frame_time / (1 / MOVE_SPEED);
 	cub->player.rot_speed = frame_time / (1 / ROT_SPEED);
 	mlx_put_image_to_window(cub->mlx.mlx, cub->mlx.win, cub->img.img, 0, 0);
@@ -32,8 +39,8 @@ void	cub_loop_game(t_cub *cub)
 	cub->map.map[(int)cub->player.pos_x][(int)cub->player.pos_y] = ' ';
 	cub_mmap_check(cub, true);
 	cub_draw_player(cub, false);
-	mlx_mouse_move(cub->mlx.mlx, cub->mlx.win, \
-		cub->mlx.screen_size / 2, cub->mlx.screen_size / 2);
+	mlx_mouse_move(cub->mlx.mlx, cub->mlx.win, cub->mlx.screen_size / 2,
+		cub->mlx.screen_size / 2);
 	mlx_hook(cub->mlx.win, KeyPress, KeyPressMask, &cub_key_press, cub);
 	mlx_hook(cub->mlx.win, KeyRelease, KeyReleaseMask, &cub_key_release, cub);
 	mlx_hook(cub->mlx.win, DestroyNotify, StructureNotifyMask, &cub_exit, cub);

@@ -6,7 +6,7 @@
 /*   By: dcaetano <dcaetano@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 12:31:45 by dcaetano          #+#    #+#             */
-/*   Updated: 2024/01/08 18:57:30 by dcaetano         ###   ########.fr       */
+/*   Updated: 2025/02/15 20:30:58 by dcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,13 @@ long int	cub_atol(const char *nptr)
 
 unsigned int	cub_convert_to_rgb(unsigned int value)
 {
-	auto unsigned int r = (value >> 16) & 0xFF;
-	auto unsigned int g = (value >> 8) & 0xFF;
-	auto unsigned int b = value & 0xFF;
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
+
+	r = (value >> 16) & 0xFF;
+	g = (value >> 8) & 0xFF;
+	b = value & 0xFF;
 	return (r << 16 | g << 8 | b);
 }
 

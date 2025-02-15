@@ -6,7 +6,7 @@
 /*   By: dcaetano <dcaetano@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 20:23:12 by dcaetano          #+#    #+#             */
-/*   Updated: 2024/01/15 08:49:53 by dcaetano         ###   ########.fr       */
+/*   Updated: 2025/02/15 20:32:58 by dcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,88 +14,94 @@
 
 void	cub_draw_mmap_4(t_cub *cub, bool draw)
 {
-	auto int alt_y = -1, x = 0;
-	auto int y = cub->map.height - (cub->map.minimap_size * 2 + 1) - 1;
-	while (++alt_y < cub->map.minimap_size * 2 + 1)
+	const int	p[] = {cub->player.pos_x, cub->player.pos_y};
+	const int	ct[] = {0, cub->map.height - (cub->map.minimap_size * 2 + 1)
+		- 1, 0, -1};
+	int			*t;
+
+	t = (int *)ct;
+	while (++t[3] < cub->map.minimap_size * 2 + 1)
 	{
-		++y;
-		x = -1;
-		while (++x < cub->map.minimap_size * 2 + 1)
+		++t[1];
+		t[0] = -1;
+		while (++t[0] < cub->map.minimap_size * 2 + 1)
 		{
 			if (draw)
-				cub_check_shape(cub, x, alt_y, cub->map.map[y][x]);
-			if (y == (int)cub->player.pos_x && x == (int)cub->player.pos_y)
+				cub_check_shape(cub, t[0], t[3], cub->map.map[t[1]][t[0]]);
+			if (t[1] == p[0] && t[0] == p[1])
 			{
-				cub->tmp.x = x * MINIMAP;
-				cub->tmp.y = alt_y * MINIMAP;
+				cub->tmp.x = t[0] * MINIMAP;
+				cub->tmp.y = t[3] * MINIMAP;
 			}
 		}
-		cub_draw_last_column(cub, x, alt_y);
+		cub_draw_last_column(cub, t[0], t[3]);
 	}
-	cub_draw_last_line(cub, x, alt_y);
-	cub_small_update(cub);
+	return (cub_draw_last_line(cub, t[0], t[3]), cub_small_update(cub));
 }
 
 void	cub_draw_mmap_5(t_cub *cub, bool draw)
 {
-	auto int alt_y = -1, alt_x = 0;
-	auto int y = cub->map.height - (cub->map.minimap_size * 2 + 1) - 1;
-	while (++alt_y < cub->map.minimap_size * 2 + 1)
+	const int	p[] = {cub->player.pos_x, cub->player.pos_y};
+	const int	ct[] = {0, cub->map.height - (cub->map.minimap_size * 2 + 1)
+		- 1, 0, -1};
+	int			*t;
+
+	t = (int *)ct;
+	while (++t[3] < cub->map.minimap_size * 2 + 1)
 	{
-		++y;
-		alt_x = -1;
-		auto int x = cub->map.width - (cub->map.minimap_size * 2 + 1) - 1;
-		while (++alt_x < cub->map.minimap_size * 2 + 1)
+		++t[1];
+		t[2] = -1;
+		t[0] = cub->map.width - (cub->map.minimap_size * 2 + 1) - 1;
+		while (++t[2] < cub->map.minimap_size * 2 + 1)
 		{
-			++x;
+			++t[0];
 			if (draw)
-				cub_check_shape(cub, alt_x, alt_y, cub->map.map[y][x]);
-			if (y == (int)cub->player.pos_x && x == (int)cub->player.pos_y)
+				cub_check_shape(cub, t[2], t[3], cub->map.map[t[1]][t[0]]);
+			if (t[1] == p[0] && t[0] == p[1])
 			{
-				cub->tmp.x = alt_x * MINIMAP;
-				cub->tmp.y = alt_y * MINIMAP;
+				cub->tmp.x = t[2] * MINIMAP;
+				cub->tmp.y = t[3] * MINIMAP;
 			}
 		}
-		cub_draw_last_column(cub, alt_x, alt_y);
+		cub_draw_last_column(cub, t[2], t[3]);
 	}
-	cub_draw_last_line(cub, alt_x, alt_y);
-	cub_small_update(cub);
+	return (cub_draw_last_line(cub, t[2], t[3]), cub_small_update(cub));
 }
 
 void	cub_draw_mmap_6(t_cub *cub, bool draw)
 {
-	auto int alt_y = -1, alt_x = 0;
-	auto int y = cub->map.height - (cub->map.minimap_size * 2 + 1) - 1;
-	while (++alt_y < cub->map.minimap_size * 2 + 1)
+	const int	p[] = {cub->player.pos_x, cub->player.pos_y};
+	const int	ct[] = {0, cub->map.height - (cub->map.minimap_size * 2 + 1)
+		- 1, 0, -1};
+	int			*t;
+
+	t = (int *)ct;
+	while (++t[3] < cub->map.minimap_size * 2 + 1)
 	{
-		++y;
-		alt_x = -1;
-		auto int x = (int)cub->player.pos_y - cub->map.minimap_size - 1;
-		while (++x < (int)cub->player.pos_y - \
-			cub->map.minimap_size + cub->map.minimap_size * 2 + 1)
+		++t[1];
+		t[2] = -1;
+		t[0] = p[1] - cub->map.minimap_size - 1;
+		while (++t[0] < p[1] + cub->map.minimap_size + 1)
 		{
-			++alt_x;
+			++t[2];
 			if (draw)
-				cub_check_shape(cub, alt_x, alt_y, cub->map.map[y][x]);
-			if (y == (int)cub->player.pos_x && x == (int)cub->player.pos_y)
+				cub_check_shape(cub, t[2], t[3], cub->map.map[t[1]][t[0]]);
+			if (t[1] == p[0] && t[0] == p[1])
 			{
-				cub->tmp.x = alt_x * MINIMAP;
-				cub->tmp.y = alt_y * MINIMAP;
+				cub->tmp.x = t[2] * MINIMAP;
+				cub->tmp.y = t[3] * MINIMAP;
 			}
 		}
-		cub_draw_last_column(cub, alt_x + 1, alt_y);
+		cub_draw_last_column(cub, t[2] + 1, t[3]);
 	}
-	cub_draw_last_line(cub, alt_x + 1, alt_y);
-	cub_small_update(cub);
+	return (cub_draw_last_line(cub, t[2] + 1, t[3]), cub_small_update(cub));
 }
 
 void	cub_mmap_check_2(t_cub *cub, bool draw)
 {
 	if ((int)cub->player.pos_y - cub->map.minimap_size < 0)
-		cub_draw_mmap_4(cub, draw);
-	else if ((int)cub->player.pos_y + cub->map.minimap_size \
-		> cub->map.width - 1)
-		cub_draw_mmap_5(cub, draw);
-	else
-		cub_draw_mmap_6(cub, draw);
+		return (cub_draw_mmap_4(cub, draw));
+	if ((int)cub->player.pos_y + cub->map.minimap_size > cub->map.width - 1)
+		return (cub_draw_mmap_5(cub, draw));
+	return (cub_draw_mmap_6(cub, draw));
 }

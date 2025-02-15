@@ -6,7 +6,7 @@
 /*   By: dcaetano <dcaetano@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 20:17:15 by dcaetano          #+#    #+#             */
-/*   Updated: 2024/05/08 11:04:53 by dcaetano         ###   ########.fr       */
+/*   Updated: 2025/02/15 19:20:05 by dcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 bool	cub_check_angle(t_cub *cub, int x, int y)
 {
-	auto double angle = atan2(cub->player.dir_y, cub->player.dir_x);
-	angle = angle * 180 / PI - 90;
+	double	angle;
+
+	angle = atan2(cub->player.dir_y, cub->player.dir_x) * 180 / PI - 90;
 	if (angle < 0)
 		angle += 360;
 	if (angle >= 67.5 && angle < 112.5)
@@ -39,36 +40,39 @@ bool	cub_check_angle(t_cub *cub, int x, int y)
 
 void	cub_check_pixel(t_cub *cub, int x, int y, bool erase)
 {
-	auto int pos_x = (int)floor((cub->player.pos_x * MINIMAP + y) / MINIMAP);
-	auto int pos_y = (int)floor((cub->player.pos_y * MINIMAP + x) / MINIMAP);
-	auto char c = cub->map.map[pos_x][pos_y];
+	int		p[2];
+	char	c;
+
+	p[0] = (int)floor((cub->player.pos_x * MINIMAP + y) / MINIMAP);
+	p[1] = (int)floor((cub->player.pos_y * MINIMAP + x) / MINIMAP);
+	c = cub->map.map[p[0]][p[1]];
 	if (!erase)
 	{
-		cub_draw_pixel(&cub->img, cub->tmp.x + x, \
-			cub->tmp.y + y, PLAYER_COLOR);
+		cub_draw_pixel(&cub->img, cub->tmp.x + x, cub->tmp.y + y, PLAYER_COLOR);
 		if (cub_check_angle(cub, x, y))
-			cub_draw_pixel(&cub->img, cub->tmp.x + x, \
-				cub->tmp.y + y, DIR_COLOR);
+			cub_draw_pixel(&cub->img, cub->tmp.x + x, cub->tmp.y + y,
+				DIR_COLOR);
 		return ;
 	}
 	if (c == '1')
-		cub_draw_pixel(&cub->img, cub->tmp.x + x, \
-			cub->tmp.y + y, WALL_COLOR);
+		cub_draw_pixel(&cub->img, cub->tmp.x + x, cub->tmp.y + y, WALL_COLOR);
 	else if (c == '-')
-		cub_draw_pixel(&cub->img, cub->tmp.x + x, \
-			cub->tmp.y + y, EMPTY_COLOR);
+		cub_draw_pixel(&cub->img, cub->tmp.x + x, cub->tmp.y + y, EMPTY_COLOR);
 	else
-		cub_draw_pixel(&cub->img, cub->tmp.x + x, \
-			cub->tmp.y + y, FLOOR_COLOR);
+		cub_draw_pixel(&cub->img, cub->tmp.x + x, cub->tmp.y + y, FLOOR_COLOR);
 }
 
 void	cub_draw_player(t_cub *cub, bool erase)
 {
-	auto int i = PLAYER_SZ * -1 - 1;
-	auto int sum = 1;
+	int	i;
+	int	sum;
+	int	j;
+
+	i = PLAYER_SZ * -1 - 1;
+	sum = 1;
 	while (++i <= PLAYER_SZ)
 	{
-		auto int j = PLAYER_SZ * -1 - 1;
+		j = PLAYER_SZ * -1 - 1;
 		while (++j <= PLAYER_SZ)
 			if (j >= (sum - 1) * -1 && j <= sum - 1)
 				cub_check_pixel(cub, j, i, erase);
@@ -81,10 +85,13 @@ void	cub_draw_player(t_cub *cub, bool erase)
 
 void	cub_draw_square(t_cub *cub, int x, int y, unsigned int color)
 {
-	auto int i = -1;
+	int	i;
+	int	j;
+
+	i = -1;
 	while (++i < MINIMAP)
 	{
-		auto int j = -1;
+		j = -1;
 		while (++j < MINIMAP)
 			cub_draw_pixel(&cub->img, x + i, y + j, color);
 	}

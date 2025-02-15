@@ -6,7 +6,7 @@
 /*   By: dcaetano <dcaetano@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 18:25:26 by dcaetano          #+#    #+#             */
-/*   Updated: 2024/01/08 20:48:33 by dcaetano         ###   ########.fr       */
+/*   Updated: 2025/02/15 19:27:51 by dcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ void	cub_get_minimap_size(t_map *map)
 
 void	cub_player_position(t_cub *cub)
 {
-	auto int i = -1;
+	int	i;
+	int	j;
+
+	i = -1;
 	while (++i < cub->map.height)
 	{
-		auto int j = -1;
+		j = -1;
 		while (++j < cub->map.width)
 		{
 			if (ft_strchr(PLAYER_CHARSET, cub->map.map[i][j]))
