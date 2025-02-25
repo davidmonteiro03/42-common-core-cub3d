@@ -1,7 +1,7 @@
-NO ./textures/subject/bluestone.xpm
-NO ./textures/subject/eagle.xpm
-EA ./textures/subject/greystone.xpm
-WE ./textures/subject/redbrick.xpm
+NO ./textures/bluestone.xpm
+NO ./textures/eagle.xpm
+EA ./textures/greystone.xpm
+WE ./textures/redbrick.xpm
 
 F 0,0,0
 C 0,0,0
