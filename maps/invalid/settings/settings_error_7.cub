@@ -1,7 +1,7 @@
-NO ./textures/42/redbrick.xpm
-SO ./textures/42/redbrick.xpm
-WE ./textures/42/bluestone.xpm
-EA ./textures/42/bluestone.xpm
+NO ./textures/redbrick.xpm
+SO ./textures/redbrick.xpm
+WE ./textures/bluestone.xpm
+EA ./textures/bluestone.xpm
 
 F 0,255,0
 C 0,255,255
