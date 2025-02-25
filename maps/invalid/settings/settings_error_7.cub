@@ -6,7 +6,7 @@ EA ./textures/bluestone.xpm
 F 0,255,0
 C 0,255,255
 
-NO ./textures/42/redbrick.xpm
+NO ./textures/redbrick.xpm
 
  11111111111111111
 1E                1
