@@ -1,7 +1,7 @@
-NO ./textures/subject/bluestone.xpm
-SO ./textures/invalid/wrong_ext.xp
-EA ./textures/subject/greystone.xpm
-WE ./textures/subject/redbrick.xpm
+NO ./textures/bluestone.xpm
+SO ./textures/wrong_ext.xp
+EA ./textures/greystone.xpm
+WE ./textures/redbrick.xpm
 
 F 0,0,0
 C 0,0,0
