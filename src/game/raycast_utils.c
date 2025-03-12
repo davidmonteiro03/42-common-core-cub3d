@@ -6,7 +6,7 @@
 /*   By: dcaetano <dcaetano@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:11:30 by dcaetano          #+#    #+#             */
-/*   Updated: 2025/02/15 21:18:54 by dcaetano         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:23:58 by dcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ t_img	*cub_get_wall(t_cub *cub)
 	t_img	*img;
 
 	if (cub->raycast.side == 0 && cub->raycast.ray_dir_x > 0)
-		img = &cub->directions.south;
-	else if (cub->raycast.side == 0 && cub->raycast.ray_dir_x < 0)
 		img = &cub->directions.north;
+	else if (cub->raycast.side == 0 && cub->raycast.ray_dir_x < 0)
+		img = &cub->directions.south;
 	else if (cub->raycast.side == 1 && cub->raycast.ray_dir_y > 0)
-		img = &cub->directions.east;
-	else
 		img = &cub->directions.west;
+	else
+		img = &cub->directions.east;
 	return (img);
 }
