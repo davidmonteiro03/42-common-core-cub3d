@@ -5,11 +5,56 @@ kos=0
 name=cub3D
 wrongext="wrong_extension.cub3d"
 notfound="maps/notfound.cub"
+forbidden=$(find * -type f -name "*forbid*.cub" -exec sh -c 'cat "$1" | grep "forbid" | awk "{ print \$2 }" | xargs' _ {} \;)
+MLX_LINUX="minilibx-linux"
+
+rm -rf "$MLX_LINUX"
+
+((total++))
+if /usr/bin/norminette 2>&1 > /dev/null
+then
+	((oks++))
+	printf "\033[1;32m✓\033[0m\033[0;32m Norminette:\033[1;32m OK\033[0m\n" 2>/dev/null
+else
+	((kos++))
+	printf "\033[5;31m✗\033[0m\033[0;31m Norminette:\033[1;31m KO\033[0m\n" 2>/dev/null
+fi
+
+ZIP="$MLX_LINUX.tgz"
+LINK="https://cdn.intra.42.fr/document/document/31395/$ZIP"
+
+(wget -q --spider "$LINK" && wget -qnc "$LINK") || exit 1
+tar -xf "$ZIP" || exit 1
+rm -rf "$ZIP" || exit 1
+
+((total++))
+if make -s 2>&1 > /dev/null
+then
+	((oks++))
+	printf "\033[1;32m✓\033[0m\033[0;32m Makefile-compilation:\033[1;32m OK\033[0m\n" 2>/dev/null
+else
+	((kos++))
+	printf "\033[5;31m✗\033[0m\033[0;31m Makefile-compilation:\033[1;31m KO\033[0m\n" 2>/dev/null
+fi
+
+((total++))
+if [ "$(make -n)" == "make: Nothing to be done for 'all'." ]
+then
+	((oks++))
+	printf "\033[1;32m✓\033[0m\033[0;32m Makefile-relink:\033[1;32m OK\033[0m\n" 2>/dev/null
+else
+	((kos++))
+	printf "\033[5;31m✗\033[0m\033[0;31m Makefile-relink:\033[1;31m KO\033[0m\n" 2>/dev/null
+fi
+
+chmod -r $(find * -type f -name "forbid*.cub") || true
+chmod -r $forbidden 2>/dev/null || true
 
 testvalid () {
 	if [ $# != 1 ]; then
 		return
 	fi
+	chmod +x $name
 	eval "./$name" "$1" 2>/dev/null > /dev/null
 	if [ $? -eq 0 ]; then
 		((oks++))
@@ -25,6 +70,7 @@ testinvalid () {
 	if [ $# != 1 ]; then
 		return
 	fi
+	chmod +x $name
 	eval "./$name" "$1" 2>/dev/null > /dev/null
 	if [ $? -eq 0 ]; then
 		((kos++))
@@ -61,6 +107,9 @@ if [ -f "$name" ]; then
 	else
 		printf "\033[1;32mSuccess!\033[0;32m All tests passed!\033[0m\n"
 	fi
+	make fclean -s 2>&1 > /dev/null || exit 1
+	rm -rf "$MLX_LINUX"
+	find * -type f -exec chmod 644 {} \;
 else
-	printf "\033[5;31m✗\033[0m\033[1;31m $name:\033[0;31m file not found\033[0m\n" 2>/dev/null;
+	printf "\033[5;31m✗\033[0m\033[1;31m $name:\033[0;31m file not found\033[0m\n" 2>/dev/null
 fi

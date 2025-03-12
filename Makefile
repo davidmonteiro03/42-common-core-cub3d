@@ -60,26 +60,26 @@ EXEC           = cub3D
 all: $(EXEC)
 
 $(OBJS_DIR)%.o: %.c include/cub3D.h
-	@mkdir -p $(dir $@)
+	@mkdir -p $(dir $@) 2>&1 > /dev/null
 	@$(CC) $(CFLAGS) -I$(INCLUDES_DIR) -c $< -o $@
 
 $(OBJS_DIR)%.o: srcs/%.c include/cub3D.h
-	@mkdir -p $(dir $@)
+	@mkdir -p $(dir $@) 2>&1 > /dev/null
 	@$(CC) $(CFLAGS) -I$(INCLUDES_DIR) -c $< -o $@
 
 $(EXEC): $(OBJS)
-	@make -sC $(LIBFT_DIR)
-	@make -sC $(MINILIBX_DIR)
+	@make -sC $(LIBFT_DIR) 2>&1 > /dev/null
+	@make -sC $(MINILIBX_DIR) 2>&1 > /dev/null
 	@$(CC) $(CFLAGS) -I$(INCLUDES_DIR) $^ -o $@ -L$(LIBFT_DIR) -lft -L./$(MINILIBX_DIR) $(MINILIBX_FLAGS)
 
 clean:
 	@$(RM) $(OBJS_DIR)
-	@make -sC $(LIBFT_DIR) clean
-	@make -sC $(MINILIBX_DIR) clean
+	@make -sC $(LIBFT_DIR) clean 2>&1 > /dev/null
+	@make -sC $(MINILIBX_DIR) clean 2>&1 > /dev/null
 
 fclean: clean
 	@$(RM) $(EXEC)
-	@make -sC $(LIBFT_DIR) fclean
+	@make -sC $(LIBFT_DIR) fclean 2>&1 > /dev/null
 
 re: fclean all
 
